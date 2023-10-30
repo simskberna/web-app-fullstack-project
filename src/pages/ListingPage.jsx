@@ -54,7 +54,7 @@ export const ListingPage = ({ currency,handleProductSelect}) => {
                             height={150}
                             effect={isLoading ? 'blur' : ''}
                             width={150} 
-                            className={`p-4 rounded-t-lg h-auto w-full ${!images ? 'opacity-0' : 'opacity-1'}`}
+                            className={`max-h-[100%] p-4 rounded-t-lg h-auto w-full ${!images ? 'opacity-0' : 'opacity-1'}`}
                             src={images[0]}
                         /> 
                     </div>
