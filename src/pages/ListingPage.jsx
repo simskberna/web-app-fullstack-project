@@ -41,21 +41,23 @@ export const ListingPage = ({ currency,handleProductSelect}) => {
             {
               return (
                 
-                <div key={index} className='item w-full max-w-sm bg-white drop-shadow-lg rounded-[4px]'>
+                <div key={index} className='flex flex-col item w-full max-w-sm bg-white drop-shadow-lg rounded-[4px]'>
                     <Link 
                         onClick={() => {handleProductSelect(product)}}
                         to={`/product?id=${id}`}
                         key={index}
-                    className='p-4'>
-                     <LazyLoadImage
-                          placeholderSrc={placeHolder}
-                          loading='lazy'
-                          height={150}
-                          effect={isLoading ? 'blur' : ''}
-                          width={150} 
-                          className={`p-4 rounded-t-lg h-[150px] md:h-[300px] w-full ${!images ? 'opacity-0' : 'opacity-1'}`}
-                          src={images[0]}
-                      /> 
+                    className='p-4 w-full h-auto'>
+                    <div className='flex items-center justify-center'>
+                      <LazyLoadImage
+                            placeholderSrc={placeHolder}
+                            loading='lazy'
+                            height={150}
+                            effect={isLoading ? 'blur' : ''}
+                            width={150} 
+                            className={`p-4 rounded-t-lg h-auto w-full ${!images ? 'opacity-0' : 'opacity-1'}`}
+                            src={images[0]}
+                        /> 
+                    </div>
                            
                     </Link>  
                     <div className="px-5 pb-5"> 

@@ -15,7 +15,7 @@ export const HomePage = () => {
     <> 
       <Hero />  
 
-      <div className='min-[720px]:px-20 max-[720px]:px-8 max-[720px]:py-28 px:5 max-[920px]:mb-[50px] min-[720px]:mt-[50px] flex flex-row justify-between items-center gap-10 w-full h-auto'>
+      <div className='min-[720px]:px-20 max-[720px]:px-8 max-[720px]:py-28 px:5 max-[920px]:mb-[50px] min-[720px]:my-[50px] flex flex-row justify-between items-center gap-10 w-full h-auto'>
           <img className='w-[250px] h-[250px]' style={style}  src={ContentSrc}></img>
           <div className='flex flex-col justify-center'>
             <span className='flex flex-row items-center gap-5 text-[35px] uppercase font-bold'>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CartItem } from '../components/CartItem'
-import { GET_CART } from '../api/service'
+import { GET_CART,ORDER } from '../api/service'
 import { Loader } from '../components/Loader'
 export const CartPage = () => {
   const [cart, setCart] = useState([])
@@ -27,7 +27,10 @@ export const CartPage = () => {
       setTotal(subTotal)
     } 
     
-  }) 
+  })  
+  const handlePurchase = () => { 
+    ORDER(`user/purchase/${id}`,cart) 
+  }
   
   if (!isCartEmpty) {
     return (
@@ -50,7 +53,9 @@ export const CartPage = () => {
           </div>
            <div className='border-red-500 border-t-2 bottom text-left  px-20 relative bg-[#fff] w-full h-auto'>
            <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(total)?.toFixed(2)} $</div>
-              <button className='text-white my-2 p-5 w-[200px] bg-[#1239b8dd]'>
+              <button
+                onClick={() => {handlePurchase()}}
+                className='text-white my-2 p-5 w-[200px] bg-[#1239b8dd]'>
                 <span className='uppercase font-bold text-2xl'>
                   Purchase
                 </span>

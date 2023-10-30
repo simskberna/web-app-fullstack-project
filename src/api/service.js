@@ -1,7 +1,7 @@
 import axios from 'axios'    
 import { makeid } from '../helpers/createUserId' 
 import SERVER from '../config.js' 
-const apiBaseURL = 'http://localhost:5000'//SERVER
+const apiBaseURL = SERVER
 export const GET = (url) => {  
     const response = axios.get(`${apiBaseURL}/${url}`)
         .then(res => { 
@@ -59,4 +59,15 @@ export const REMOVE_CART = (url) => {
         console.log(err)
          
     })
+}
+export const ORDER = (url, products) => {  
+    axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   
+        if (res.status === 200) {
+            alert(`Purchase successful. Your order id is : `+res.data.orderId)
+         }
+      
+     }).catch(err => {
+         console.log(err)
+          
+     })
 }
