@@ -3,8 +3,7 @@ import React from 'react'
 import { lazy, Suspense } from 'react'
 
 import { HomePage } from './pages/HomePage'
-import { CategoryPage } from './pages/CategoryPage'
-import { AboutPage } from './pages/AboutPage'
+import { CategoryPage } from './pages/CategoryPage' 
 import { CartPage } from './pages/CartPage'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -68,8 +67,7 @@ const App = () => {
                   </ErrorBoundary>
                 }       
              />
-            
-            <Route path='/about' element={<AboutPage />} /> 
+           
             <Route path='/cart' element={<CartPage />} />  
             <Route path='product' element={
             <ProductDetail currency={currency} selectedProd={selectedProd} />} />   

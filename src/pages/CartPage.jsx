@@ -34,9 +34,9 @@ export const CartPage = () => {
       <>
         {isLoading ? <Loader /> : 
           <>
-          <div className='flex-grow relative h-full overflow-y-scroll'>
+          <div className='flex-grow relative h-full lg:min-h-[1000px] overflow-y-scroll'>
             <div className='cart flex-col'>
-              <div className='px-20 py-5 top relative h-full'>
+              <div className='px-5 md:px-20 py-5 top relative h-full'>
                 { 
                   cart.map((product, index) => {   
                     return (
@@ -48,7 +48,7 @@ export const CartPage = () => {
             </div>
        
           </div>
-           <div className='bottom text-left  px-20 relative bg-[#fff] w-full h-auto'>
+           <div className='border-red-500 border-t-2 bottom text-left  px-20 relative bg-[#fff] w-full h-auto'>
            <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(total)?.toFixed(2)} $</div>
               <button className='text-white my-2 p-5 w-[200px] bg-[#1239b8dd]'>
                 <span className='uppercase font-bold text-2xl'>

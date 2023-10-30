@@ -6,8 +6,7 @@ export const Navbar = () => {
   let [open, setOpen] = useState(false);
 
   const links = [
-    { name: 'HOME' , url: '/'},
-    { name: 'ABOUT' , url : '/about'},
+    { name: 'HOME' , url: '/'}, 
     { name: 'CATEGORIES', url: '/categories' },
     { name: 'CART' , url : '/cart'} 
   ]

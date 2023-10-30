@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { useURLID } from '../action-creators/useURLID.js';
 import { AddCartButton } from '../components/AddCartButton.jsx';
 import { Loader } from '../components/Loader.jsx';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import placeHolder from '../assets/placeHolder.png'
+
 export const ListingPage = ({ currency,handleProductSelect}) => {   
   const [products, setProducts] = useState([])  
   const [isLoading,setIsLoading] = useState(true)
@@ -43,8 +46,17 @@ export const ListingPage = ({ currency,handleProductSelect}) => {
                         onClick={() => {handleProductSelect(product)}}
                         to={`/product?id=${id}`}
                         key={index}
-                        className='p-4'>
-                          <img className="p-4 rounded-t-lg h-[150px] md:h-[300px] w-full" src={ images[0] } alt={ title } />
+                    className='p-4'>
+                     <LazyLoadImage
+                          placeholderSrc={placeHolder}
+                          loading='lazy'
+                          height={150}
+                          effect={isLoading ? 'blur' : ''}
+                          width={150} 
+                          className={`p-4 rounded-t-lg h-[150px] md:h-[300px] w-full ${!images ? 'opacity-0' : 'opacity-1'}`}
+                          src={images[0]}
+                      /> 
+                           
                     </Link>  
                     <div className="px-5 pb-5"> 
                         <h5 className="text-4 font-semibold tracking-tight text-black h-[50px] line-clamp-2">{ title }</h5>  
