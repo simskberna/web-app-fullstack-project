@@ -1,28 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { GET } from '../api/service'
 import { AddCartButton } from './AddCartButton'
+import { RemoveCartButton } from './RemoveCartButton';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import placeHolder from '../assets/placeHolder.png'
 
-export const MobileCartItem = ({product}) => {    
-    const [isLoading,setIsLoading] = useState(true)
-    const { quantity, price } = product
+export const MobileCartItem = (props) => {   
+    const [isLoading, setIsLoading] = useState(true)
+    const [itemQty,setItemQty] = useState(0)
+    const { quantity, price } = props.product
     const [image, setImage] = useState('') 
     const [name, setName] = useState('') 
     const details = {
-        id: product.productId,
-        price: product.price,
-        quantity:product.quantity
+        id: props.product.productId,
+        price: props.product.price,
+        quantity:props.product.quantity
     }
-    let data = GET(`product/${product.productId}`) 
-
+    let data = GET(`product/${props.product.productId}`) 
+    useEffect(() => { 
+        setItemQty(quantity)
+    },[props.product])
     data.then((res) => {
         if (res.images && res.images.length > 0) {
             setImage(res.images[0])
         }  
        
         setName(res.title)
-    }).then(() => {setIsLoading(false)})
+    }).then(() => { setIsLoading(false) })
+
+    const onQuantityChange = (q) => {
+        let newQuantity = q+itemQty
+        setItemQty(newQuantity)
+    } 
 return ( 
     <div className='cart bg-white p-2 my-2 flex flex-col items-center justify-center w-full gap-1'>
         <LazyLoadImage
@@ -36,8 +45,9 @@ return (
                 /> 
         <span className='name'>{name}</span>
         <span className='price'>{price} $</span>
-        <span className='quantity text-white bg-[#1239b8dd] rounded-full flex items-center justify-center p-2 h-[25px] w-[25px]'>{quantity}</span>
-        <AddCartButton product={details}/>
+        <span className='quantity text-white bg-[#1239b8dd] rounded-full flex items-center justify-center p-2 h-[25px] w-[25px]'>{itemQty}</span>
+        <RemoveCartButton productUpdate={props.productUpdate} productId={details.id} />
+        <AddCartButton productUpdate={props.productUpdate} onQuantityChange={onQuantityChange} product={details} />
     </div> 
   )
 }

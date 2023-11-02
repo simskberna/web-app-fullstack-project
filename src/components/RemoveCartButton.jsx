@@ -1,15 +1,20 @@
 import React from 'react'
 import { REMOVE_CART } from '../api/service'
-export const RemoveCartButton = ({ productId }) => {
+export const RemoveCartButton = (props) => {
     const userid = window.localStorage.getItem('userid') || ''
-    const removeFromCart = () => {
-        REMOVE_CART(`user/remove/cart/product/${userid}/${productId}`)
+    const removeFromCart = () => {  
+        const removed = REMOVE_CART(`user/remove/cart/product/${userid}/${props.productId}`) 
+        removed.then((res) => {
+            if (res) { 
+                props.productUpdate()
+            }
+        })
     }
     return (
       
     <div
         onClick={() => {removeFromCart()}}      
-        className='cursor-pointer bg-[#d31111] text-white rounded-full w-[50px] h-[25px] flex items-center justify-center'>
+        className='cursor-pointer bg-[#d31111] text-white rounded-full md:w-[50px] md:h-[25px] w-[27px] h-[27px] flex items-center justify-center'>
         X
     </div>
   )

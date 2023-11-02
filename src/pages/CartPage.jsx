@@ -7,31 +7,37 @@ export const CartPage = () => {
   const [isCartEmpty, setIsCartEmpty] = useState(false)
   const [isLoading,setIsLoading] = useState(true)
   const [total, setTotal] = useState(0)
-  let subTotal = 0
-  const id = window.localStorage.getItem('userid') || ''
-  let data = GET_CART(`user/get/cart/${id}`) 
-  useEffect(() => {  
-    data.then((res) => { 
-      setCart(res.data.products) 
-      if (!res.data.products) { 
-        setIsCartEmpty(true)
-      }  
-    }).then(() => {setIsLoading(false)})
-  }, [data.length])     
-  
+
+  const id = window.localStorage.getItem('userid') || '' 
+
   useEffect(() => {
-    if (cart && cart.length > 0) {
-      cart.map((prod) => {
-        subTotal +=( prod.price * prod.quantity)
-      })
-      setTotal(subTotal)
-    } 
-    
-  })  
+    getData()  
+  },[])
+  
+  const getData = () => {   
+    let subTotal = 0
+    let obj = GET_CART(`user/get/cart/${id}`) 
+    obj.then((res) => {   
+      if (!res.data.products) { 
+        setIsCartEmpty(true) 
+      } else { 
+        setCart(res.data.products) 
+        console.log('1: '+JSON.stringify(cart))
+        res.data.products.map((prod) => {
+          subTotal +=( prod.price * prod.quantity)
+        })   
+ 
+      } 
+    }).then(() => { setIsLoading(false);setTotal(subTotal) })
+  }
+  
   const handlePurchase = () => { 
     ORDER(`user/purchase/${id}`,cart) 
   }
-  
+  const productUpdate = () => { 
+    getData() 
+  }
+  console.log('2: '+JSON.stringify(cart))
   if (!isCartEmpty) {
     return (
       <>
@@ -41,9 +47,9 @@ export const CartPage = () => {
             <div className='cart flex-col'>
               <div className='px-5 md:px-20 py-5 top relative h-full'>
                 { 
-                  cart.map((product, index) => {   
+                  cart.map((product, index) => {  
                     return (
-                      <CartItem product={product} key={index} index={index} />
+                      <CartItem productUpdate={productUpdate} product={product} key={index} index={index} />
                     )
                   })  
                   } 

@@ -1,7 +1,7 @@
 import axios from 'axios'    
 import { makeid } from '../helpers/createUserId' 
 import SERVER from '../config.js' 
-const apiBaseURL = SERVER
+const apiBaseURL = 'http://localhost:5000'//SERVER
 export const GET = (url) => {  
     const response = axios.get(`${apiBaseURL}/${url}`)
         .then(res => { 
@@ -32,33 +32,33 @@ export const CREATE_USER = (url) => {
     })
 }  
 export const ADD_CART = (url, data) => {     
-    axios.post(`${apiBaseURL}/${url}`, data).then((res) => {  
-        if (res.status === 200) {
+    const response = axios.post(`${apiBaseURL}/${url}`, data).then((res) => {  
+        if (res.status === 200) { 
             alert('Product added to cart.')
+            return res.data 
         }
-    }).catch(err => {
-        console.log(err)
-         
-    })
+    }).catch(err => console.log(err))
+    return response
 }  
 export const GET_CART = (url) => {
     const response = axios.get(`${apiBaseURL}/${url}`)
     .then(res => { 
-        if (res.status === 200) {  
+        if (res.status === 200) {   
         return res.data
         }
-    })
-    .catch(err => console.log(err))
+    }).catch(err => console.log(err))
   
 return response
 }
 export const REMOVE_CART = (url) => {
-    axios.post(`${apiBaseURL}/${url}`).then((res) => { 
-       alert('Product removed from cart.')
-    }).catch(err => {
-        console.log(err)
-         
-    })
+    const response = axios.post(`${apiBaseURL}/${url}`)
+    .then((res) => { 
+        if (res.status === 200) {
+            alert('Product removed from cart.')
+            return res.data
+        }
+    }).catch(err => {  console.log(err) })
+    return response
 }
 export const ORDER = (url, products) => {  
     axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   

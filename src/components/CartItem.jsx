@@ -3,16 +3,16 @@ import { isMobile } from 'react-device-detect'
 import { MobileCartItem } from './MobileCartItem'
 import { DesktopCartItem } from './DesktopCartItem'
 
-export const CartItem = ({ product,index }) => { 
+export const CartItem = (props) => {  
     const [cart, setCart] = useState([])
     useEffect(() => {
-        setCart(product)
+        setCart(props.product)
     },[])  
     
     return (
-        <div key={index}>
-        { isMobile ? <MobileCartItem product={cart} /> :
-            <DesktopCartItem product={cart} />}
+        <div key={props.index}>
+            {isMobile ? <MobileCartItem productUpdate={props.productUpdate} product={cart} /> :
+            <DesktopCartItem productUpdate={props.productUpdate} product={cart} />}
         </div>
    )
 }
