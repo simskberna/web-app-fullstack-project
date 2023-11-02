@@ -18,7 +18,7 @@ export const AddCartButton = (props) => {
                     props.onQuantityChange(qty)
                     props.productUpdate()
                 }
-            })
+            }).catch(err => console.log(err))
             
         }
     }

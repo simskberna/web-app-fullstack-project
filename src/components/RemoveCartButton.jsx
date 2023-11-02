@@ -8,7 +8,7 @@ export const RemoveCartButton = (props) => {
             if (res) { 
                 props.productUpdate()
             }
-        })
+        }).catch(err => console.log(err))
     }
     return (
       
