@@ -21,8 +21,7 @@ export const CartPage = () => {
       if (!res.data.products) { 
         setIsCartEmpty(true) 
       } else { 
-        setCart(res.data.products) 
-        console.log('1: '+JSON.stringify(cart))
+        setCart(res.data.products)  
         res.data.products.map((prod) => {
           subTotal +=( prod.price * prod.quantity)
         })   
@@ -36,8 +35,7 @@ export const CartPage = () => {
   }
   const productUpdate = () => { 
     getData() 
-  }
-  console.log('2: '+JSON.stringify(cart))
+  } 
   if (!isCartEmpty) {
     return (
       <>
