@@ -1,7 +1,7 @@
 import axios from 'axios'    
 import { makeid } from '../helpers/createUserId' 
 import SERVER from '../config.js' 
-const apiBaseURL = 'http://localhost:5000'//SERVER
+const apiBaseURL = SERVER
 export const GET = (url) => {  
     const response = axios.get(`${apiBaseURL}/${url}`)
         .then(res => { 
