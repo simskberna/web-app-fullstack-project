@@ -32,7 +32,12 @@ export const CartPage = () => {
   }
   
   const handlePurchase = () => { 
-    ORDER(`user/purchase/${id}`,cart) 
+    const order = ORDER(`user/purchase/${id}`, cart) 
+    order.then((res) => {
+      if (res) {
+        getData();
+      }
+    }).catch(err => {console.log(err)})
   }
   const productUpdate = () => { 
     getData() 

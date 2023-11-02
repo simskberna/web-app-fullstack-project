@@ -61,13 +61,15 @@ export const REMOVE_CART = (url) => {
     return response
 }
 export const ORDER = (url, products) => {  
-    axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   
+  const result =  axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   
         if (res.status === 200) {
             alert(`Purchase successful. Your order id is : `+res.data.orderId)
-         }
+      }
+      return res.data
       
      }).catch(err => {
          console.log(err)
           
      })
+    return result
 }
