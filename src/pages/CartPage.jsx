@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { CartItem } from '../components/CartItem'
-import { GET_CART,ORDER } from '../api/service'
+import React, { useEffect } from 'react'
+import { CartItem } from '../components/CartItem' 
 import { Loader } from '../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCart } from '../state/slice/getCart'
+import { purchase } from '../state/slice/purchase'
+
 export const CartPage = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state)  
-  const [total, setTotal] = useState(0) 
-  const id = window.localStorage.getItem('userid') || '' 
-   
+  const state = useSelector((state) => state)   
+  const id = window.localStorage.getItem('userid') || ''  
   useEffect(() => {
     dispatch(getCart(id))   
   },[])
   const handlePurchase = () => { 
-    const order = ORDER(`user/purchase/${id}`, cart) 
-    order.then((res) => {
-      if (res) {
-        getData();
-      }
-    }).catch(err => {console.log(err)})
+    const obj = {
+      id,
+      cart:state?.getCart?.data
+    }   
+    dispatch(purchase(obj))  
+    setTimeout(() => {productUpdate()},500)
   }
-  const productUpdate = () => { 
-    dispatch(getCart(id)) 
-    if (!state.getCart.data.products) {
-      setIsCartEmpty(true)
-    }
+  const productUpdate = () => {     
+    dispatch(getCart(id))
   }  
   if (!state.getCart.isEmpty) {
     return (
@@ -49,7 +45,7 @@ export const CartPage = () => {
           </div>
           }
         <div className='border-red-500 border-t-2 bottom text-left  px-20 relative bg-[#fff] w-full h-auto'>
-        <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(total)?.toFixed(2)} $</div>
+        <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(state?.getCart?.data?.total || 0)?.toFixed(2)} $</div>
           <button
             onClick={() => {handlePurchase()}}
             className='text-white my-2 p-5 w-[200px] bg-[#1239b8dd]'>

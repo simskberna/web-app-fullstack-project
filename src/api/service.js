@@ -33,8 +33,7 @@ export const CREATE_USER = (url) => {
 }  
 export const ADD_CART = (url, data) => {     
     const response = axios.post(`${apiBaseURL}/${url}`, data).then((res) => {  
-        if (res.status === 200) { 
-            alert('Product added to cart.')
+        if (res.status === 200) {  
             return res.data 
         }
     }).catch(err => console.log(err))
@@ -53,23 +52,18 @@ return response
 export const REMOVE_CART = (url) => {
     const response = axios.post(`${apiBaseURL}/${url}`)
     .then((res) => { 
-        if (res.status === 200) {
-            alert('Product removed from cart.')
+        if (res.status === 200) { 
             return res.data
         }
     }).catch(err => {  console.log(err) })
     return response
 }
 export const ORDER = (url, products) => {  
-  const result =  axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   
+  const response =   axios.post(`${apiBaseURL}/${url}`, {products:products}).then((res) => {   
         if (res.status === 200) {
-            alert(`Purchase successful. Your order id is : `+res.data.orderId)
-      }
-      return res.data
-      
-     }).catch(err => {
-         console.log(err)
-          
-     })
-    return result
+            alert(`Purchase successful. Your order id is : ` + res.data.orderId)
+            return res.data
+        }  
+     }).catch(err => { console.log(err)  })
+    return response
 }

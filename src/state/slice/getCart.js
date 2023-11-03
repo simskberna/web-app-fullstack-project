@@ -15,8 +15,7 @@ const getCartSlice = createSlice({
         isEmpty : false
     },
     extraReducers: (builder) => {
-        builder.addCase(getCart.pending, (state, action) => {
-            console.log('pendind: ', action.payload);
+        builder.addCase(getCart.pending, (state, action) => { 
             state.isLoading = true  
         })
         builder.addCase(getCart.fulfilled, (state, action) => { 

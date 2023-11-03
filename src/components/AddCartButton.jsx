@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { ADD_CART } from '../api/service'; 
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../state/slice/addToCart'
 export const AddCartButton = (props) => { 
+    const dispatch = useDispatch(); 
     const [qty, setQty] = useState(1)  
     const info = {
         productId: props.product.id,
@@ -9,17 +11,13 @@ export const AddCartButton = (props) => {
     }
  
       
-    const addToCart = () => {      
-       
-        if (info.quantity > 0) { 
-            const cartAdd = ADD_CART(`user/add/cart/${window.localStorage.getItem('userid')}`, info)
-            cartAdd.then((res) => {
-                if (props.onQuantityChange && res) {
-                    props.onQuantityChange(qty)
-                    props.productUpdate()
-                }
-            }).catch(err => console.log(err))
-            
+    const onAddToCart = () => {       
+        if (info.quantity > 0) {  
+            dispatch(addToCart(info))
+            setTimeout(() => {
+                props.onQuantityChange(qty)
+                props.productUpdate()  
+            },250)
         }
     }
    
@@ -27,7 +25,7 @@ export const AddCartButton = (props) => {
   return (
       <div className='flex gap-2 justify-between items-center w-full my-2 md:flex-row flex-col'>
           <button
-              onClick={() => { addToCart();}}
+              onClick={() => { onAddToCart();}}
               className='shadow-lg shadow-[#949494] bg-[#151399] text-white font-bold rounded-[3px] min-w-[720px]:p-2 p-[2px] h-[45px] min-w-[720px]:w-[200px] min-w-[720px]:mb-0 mb-2 w-[100px]'>
              
 
