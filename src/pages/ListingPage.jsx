@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react' 
 import { GET } from '../api/service.js' 
 import { Link } from 'react-router-dom'; 
-import { useURLID } from '../action-creators/useURLID.js';
+import { useURLID } from '../helpers/useURLID.js';
 import { AddCartButton } from '../components/AddCartButton.jsx';
 import { Loader } from '../components/Loader.jsx';
 import { LazyLoadImage } from 'react-lazy-load-image-component';

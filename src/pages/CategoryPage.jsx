@@ -1,9 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'   
-import { useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react' 
-import { bindActionCreators } from '@reduxjs/toolkit'
-import { actionCreators } from '../index'
+import { Link } from 'react-router-dom'    
+import { useEffect, useState } from 'react'  
 import { GET } from '../api/service.js' 
 import { Loader } from '../components/Loader'
 export const CategoryPage = ({ categories, handleClick }) => {     
@@ -22,9 +19,7 @@ export const CategoryPage = ({ categories, handleClick }) => {
       }).then(() => setIsLoading(false))
     }, [])  
   }
- 
-  const dispatch = useDispatch()
-  const { setCategory } = bindActionCreators(actionCreators, dispatch) 
+  
   return (
     <>
       {

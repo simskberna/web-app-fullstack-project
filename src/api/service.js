@@ -40,8 +40,8 @@ export const ADD_CART = (url, data) => {
     }).catch(err => console.log(err))
     return response
 }  
-export const GET_CART = (url) => {
-    const response = axios.get(`${apiBaseURL}/${url}`)
+export const GET_CART = async(url) => {
+    const response = await axios.get(`${apiBaseURL}/${url}`)
     .then(res => { 
         if (res.status === 200) {   
         return res.data
