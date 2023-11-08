@@ -1,23 +1,28 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../state/slice/addToCart'
+import { addToCart } from '../state/slice/addToCart' 
 export const AddCartButton = (props) => { 
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();  
     const [qty, setQty] = useState(1)  
     const info = {
         productId: props.product.id,
         price: props.product.price,
         quantity : qty
     }
- 
-      
+  
     const onAddToCart = () => {       
         if (info.quantity > 0) {  
             dispatch(addToCart(info))
             setTimeout(() => {
-                props.onQuantityChange(qty)
-                props.productUpdate()  
-            },250)
+                if (props.onQuantityChange && props.productUpdate)  {
+                    props.onQuantityChange(qty)
+                    props.productUpdate()  
+                }  
+                else {
+                    alert('Product added to cart.')
+                }
+            }, 250)
+            
         }
     }
    

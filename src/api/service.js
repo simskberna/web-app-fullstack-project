@@ -15,7 +15,7 @@ export const GET = (url) => {
         
 }  
 export const CREATE_USER = (url) => {    
-    let id = makeid(7) 
+    let id = makeid(7)  
     if (window.localStorage.getItem('userid') === null) {
         window.localStorage.setItem('userid', id)
     }else {
