@@ -3,9 +3,43 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'  
 import { GET } from '../api/service.js' 
 import { Loader } from '../components/Loader'
+import CoffeeMakers from '../assets/CoffeMakers.png'
+import Cleaners from '../assets/Cleaners.png'
+import Mixers from '../assets/Mixers.png' 
+import HomeEntertainment from '../assets/HomeEntertainment.png'
+import Health from '../assets/HealthAndPersonal.png'
+import Lightning from '../assets/Lightning.png'
+
 export const CategoryPage = ({ categories, handleClick }) => {     
   const [thisCategories, setCategories] = useState([])
-  const [isLoading,setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  
+  const categoriesImages = [
+    { 
+      'index' : '1',
+      'src' : CoffeeMakers
+    },
+    { 
+      'index' : '2',
+      'src' : Cleaners
+    },
+    { 
+      'index' : '3',
+      'src' : Mixers
+    },
+    { 
+      'index' : '4',
+      'src' : HomeEntertainment
+    },
+    { 
+      'index' : '5',
+      'src' : Health
+    },
+    { 
+      'index' : '6',
+      'src' : Lightning
+    }
+  ] 
   if (categories && categories.length > 0 && categories !== '') {
     useEffect(() => {
       setCategories(categories)
@@ -20,12 +54,14 @@ export const CategoryPage = ({ categories, handleClick }) => {
     }, [])  
   }
   
+  
   return (
     <>
       {
         isLoading ? <Loader /> : 
         <div className='h-full grid gap-4 lg:grid-cols-3 grid-cols-2'> 
-        {thisCategories.map((item, index) => {   
+            {thisCategories.map((item, index) => {   
+              item.image = categoriesImages[index].src  
           const { id, name, category, image } = item;    
           return ( 
             <Link
