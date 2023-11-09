@@ -1,7 +1,7 @@
 import axios from 'axios'    
-import { makeid } from '../helpers/createUserId' 
-import SERVER from '../config.js' 
-const apiBaseURL = SERVER
+import { makeid } from '../helpers/createUserId'  
+
+const apiBaseURL = import.meta.env.VITE_SERVER 
 export const GET = (url) => {  
     const response = axios.get(`${apiBaseURL}/${url}`)
         .then(res => { 
