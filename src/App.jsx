@@ -53,7 +53,7 @@ const App = () => {
                 categories={categories} />} /> 
             
             <Route
-                path='category'
+                path='/category'
                 element={
                   <ErrorBoundary
                     FallbackComponent={<div>Error</div>}
@@ -69,7 +69,7 @@ const App = () => {
              />
            
             <Route path='/cart' element={<CartPage />} />  
-            <Route path='product' element={
+            <Route path='/product' element={
             <ProductDetail currency={currency} selectedProd={selectedProd} />} />   
           
            <Route path='*' element={<NotFound />} />
