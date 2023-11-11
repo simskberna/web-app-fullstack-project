@@ -55,16 +55,10 @@ const App = () => {
             <Route
                 path='/category'
                 element={
-                  <ErrorBoundary
-                    FallbackComponent={<div>Error</div>}
-                    onReset={() => navigate('/') }>
-                    <Suspense fallback="Loading...">
-                      <ListingPage 
-                        handleProductSelect={(product) => handleProductSelect(product)}
-                        currency={currency}
-                        />
-                    </Suspense>
-                  </ErrorBoundary>
+                  <ListingPage 
+                  handleProductSelect={(product) => handleProductSelect(product)}
+                  currency={currency}
+                  />
                 }       
              />
            
