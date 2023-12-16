@@ -16,7 +16,7 @@ export const RemoveCartButton = (props) => {
       
     <div
         onClick={() => {removeItem()}}      
-        className='cursor-pointer bg-[#d31111] text-white rounded-full md:w-[50px] md:h-[25px] w-[27px] h-[27px] flex items-center justify-center'>
+        className='cursor-pointer bg-[#d31111] text-white p-2 h-[25px] w-[25px] flex items-center justify-center'>
         X
     </div>
   )

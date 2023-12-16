@@ -11,7 +11,7 @@ export const DesktopCartItem = (props) => {
     const details = {
         id: props.product.productId,
         price: props.product.price,
-        quantity:props.product.quantity
+        quantity: props.product.quantity, 
     }
     const [image, setImage] = useState('') 
     const [name, setName] = useState('') 
@@ -36,9 +36,9 @@ export const DesktopCartItem = (props) => {
     
     return ( 
     <div className='cart bg-white p-5 my-2 flex flex-col gap-10'>
-        <div className='flex items-center justify-between gap-5'>
-                <div className='image-wrapper flex items-center justify-center max-w-[300px] max-h-[150px]'>
-                
+            <div className='flex items-center justify-between gap-5'>
+            <RemoveCartButton productUpdate={props.productUpdate} productId={details.id} />
+                <div className='image-wrapper flex items-center justify-center max-w-[300px] max-h-[150px]'> 
                 <LazyLoadImage
                     placeholderSrc={placeHolder}
                     loading='lazy'
@@ -50,15 +50,15 @@ export const DesktopCartItem = (props) => {
                 />
                 </div>
                 <span className='name line-clamp-3 w-full'>{name}</span>
-                <span className='price w-[150px]'>{price} $</span>
-                <span className='quantity text-white bg-[#1239b8dd] rounded-full flex items-center justify-center p-2 h-[25px] w-[25px]'>{itemQty}</span>
-                <RemoveCartButton productUpdate={props.productUpdate} productId={details.id} />
+                <span className='price w-[150px]'>{price} $</span> 
+                <div className='w-full flex items-center justify-between'>
+               
+               <AddCartButton productUpdate={props.productUpdate} onQuantityChange={onQuantityChange} product={details} />
+               <span className='quantity text-white bg-[#7c7c7c80] flex items-center justify-center p-2 h-[25px] w-[25px]'>{itemQty}</span>
+              
+           </div>
         </div>
-            <div className='w-full flex items-center justify-between'>
-               
-                <AddCartButton productUpdate={props.productUpdate} onQuantityChange={onQuantityChange} product={details} />
-               
-            </div>
+           
         </div> 
   )
 }

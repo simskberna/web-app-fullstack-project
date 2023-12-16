@@ -3,18 +3,17 @@ import { Hero } from '../components/Hero'
 import { isMobile } from 'react-device-detect'
 import ContentSrc from '../assets/ContentImage.png'
 
-import VerticalLine from '../assets/TitleAsset.png'
+import VerticalLine from '../assets/TitleAsset.png'  
 export const HomePage = () => {
   let style = {}
   if (isMobile) {
     style = {
        display:'none'
      }
-   }
+  } 
   return (
     <> 
-      <Hero />  
-
+      <Hero />   
       <div className='min-[720px]:px-20 max-[720px]:px-8 max-[720px]:py-28 px:5 max-[920px]:mb-[50px] min-[720px]:my-[50px] flex flex-row justify-between items-center gap-10 w-full h-auto'>
           <img className='w-[250px] h-[250px]' style={style}  src={ContentSrc}></img>
           <div className='flex flex-col justify-center'>

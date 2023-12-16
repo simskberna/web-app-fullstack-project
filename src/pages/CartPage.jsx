@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CartItem } from '../components/CartItem' 
 import { Loader } from '../components/Loader'
+import { ORDER } from '../api/service.js';
 import { useDispatch, useSelector } from 'react-redux'
 import { getCart } from '../state/slice/getCart'
 import { purchase } from '../state/slice/purchase'
+import { PurchasePopup } from '../components/PurchasePopup'
 
 export const CartPage = () => {
   const dispatch = useDispatch();
+  const [purchased, setPurchased] = useState(false);
+  const [orderId, setOrderId] = useState(0);
   const state = useSelector((state) => state)   
   const id = window.localStorage.getItem('userid') || ''  
   useEffect(() => {
@@ -17,11 +21,15 @@ export const CartPage = () => {
       id,
       cart:state?.getCart?.data
     }   
-    dispatch(purchase(obj))  
-    setTimeout(() => {productUpdate()},500)
+    dispatch(purchase(obj))   
+    setTimeout(() => { productUpdate() }, 500)
+    ORDER(`user/purchase/${obj.id}`, obj.cart).then((data) => {
+     setOrderId(data.orderId)
+    })
   }
-  const productUpdate = () => {     
-    dispatch(getCart(id))
+  const productUpdate = () => {    
+    setPurchased(true);
+    dispatch(getCart(id)); 
   }  
   if (!state.getCart.isEmpty) {
     return (
@@ -29,7 +37,7 @@ export const CartPage = () => {
       <>
         { 
            state.getCart.isLoading ? <Loader /> : 
-          <div className='flex-grow relative h-full lg:min-h-[1000px] overflow-y-scroll'> 
+            <div className='flex-grow relative h-full lg:min-h-[1000px] overflow-y-scroll'>  
               <div className='cart flex-col'> 
                 <div className='px-5 md:px-20 py-5 top relative h-full'>
                   
@@ -56,7 +64,11 @@ export const CartPage = () => {
       </div>
       </>
     )
-  } else {
+  } else if (purchased !== false) {
+    return (
+      <PurchasePopup orderId={orderId} />
+    )
+  }else {
     return (
       <div className='flex-grow'>
         <div className='flex items-center justify-center text-black font-bold text-2xl'>Your cart is empty</div>

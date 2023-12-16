@@ -2,16 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-    html {
-      font-family:Proxima Nova, system-ui, sans-serif;
-      background-color: #D4D4D4;
-      height: 100%;
-      width: 100%;
-    }
-    body, #root{
-      height: 100%;
-      width: 100%;
-    }
-    .cls-1{fill:none}
+  html {
+    font-family:Proxima Nova, system-ui, sans-serif;
+    background-color: #D4D4D4;
+    height: 100%;
+    width: 100%;
+  }
+  body, #root{
+    height: 100%;
+    width: 100%;
+  }
+  .cls-1{fill:none}
+  }
+  .cart-sc::-webkit-scrollbar {
+   width: 5px;
+  }
+
+  /* Track */
+  .cart-sc::-webkit-scrollbar-track {
+   background: #f1f1f1;
+  }
+
+  /* Handle */
+  .cart-sc::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  .cart-sc::-webkit-scrollbar-thumb:hover {
+   background: #555;
   }
   

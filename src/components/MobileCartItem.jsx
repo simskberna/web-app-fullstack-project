@@ -34,6 +34,9 @@ export const MobileCartItem = (props) => {
     } 
 return ( 
     <div className='cart bg-white p-2 my-2 flex flex-col items-center justify-center w-full gap-1'>
+        <div className='remove flex items-center justify-start w-full'>
+           <RemoveCartButton productUpdate={props.productUpdate} productId={details.id} />
+        </div>
         <LazyLoadImage
                     placeholderSrc={placeHolder}
                     loading='lazy'
@@ -44,10 +47,11 @@ return (
                     src={image}
                 /> 
         <span className='name'>{name}</span>
-        <span className='price'>{price} $</span>
-        <span className='quantity text-white bg-[#1239b8dd] rounded-full flex items-center justify-center p-2 h-[25px] w-[25px]'>{itemQty}</span>
-        <RemoveCartButton productUpdate={props.productUpdate} productId={details.id} />
-        <AddCartButton productUpdate={props.productUpdate} onQuantityChange={onQuantityChange} product={details} />
+        <span className='price'>{price} $</span> 
+        <span className='quantity text-white bg-[#7c7c7c80] flex items-center justify-center p-2 h-[25px] w-[25px]'>{itemQty}</span>  
+        <div className='w-[70%]'>
+           <AddCartButton productUpdate={props.productUpdate} onQuantityChange={onQuantityChange} product={details} />
+        </div>
     </div> 
   )
 }
