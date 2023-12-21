@@ -3,8 +3,8 @@ import { GET_CART } from "../../api/service";
 
 
 export const getCart = createAsyncThunk('getCart', async (id) => {
-    const response = await GET_CART(`user/get/cart/${id}`)
-     return response.data
+    const response = await GET_CART(`user/get/cart/${id}`); 
+    return response.data;
 })
 const getCartSlice = createSlice({
     name: "getCart",

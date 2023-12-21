@@ -17,18 +17,21 @@ export const AddCartButton = (props) => {
     }
     
   
-    const onAddToCart = () => {       
+    const onAddToCart = () => {
         if (info.quantity > 0) {  
-            dispatch(addToCart(info))
+            
             setTimeout(() => {
                 if (props.onQuantityChange && props.productUpdate)  {
-                    props.onQuantityChange(qty)
-                    props.productUpdate()  
+                    props.onQuantityChange(qty);
                 } else { 
                     props.handleClick(true)
                 }
               
             }, 250)
+            setTimeout(() => {
+                props.productUpdate(); 
+            },500)
+            dispatch(addToCart(info))
             
         }
     } 
@@ -36,24 +39,24 @@ export const AddCartButton = (props) => {
       
   return (
       <div className={`flex gap-2 justify-between items-center w-full my-2 ${isProductDetail ? 'flex-row' : 'flex-col'}`}>
-          <div className='shadow-[0_1px_9px_-0px_rgba(139,139,139,139)] text-white gap-10 font-bold flex items-center justify-center qty w-full md:w-[70%] h-[30px]'>
-              <div className='inputs-left bg-[#151399] w-full h-full flex items-center justify-center'>
-              <span onClick={() => {
-                  setQty(qty => qty - 1); 
+          <div className={`shadow-[0_1px_9px_-0px_rgba(139,139,139,139)] text-white gap-10 font-bold flex items-center justify-center qty w-full ${isProductDetail ? 'md:w-[30%]' : 'md:w-[70%]'} h-[30px]`}>
+              <div  onClick={() => {
+                  setQty(qty => qty < 1 ? qty - 1 : 1); 
                   document.querySelector('.qty').value = qty
               }
-              } className='decrease cursor-pointer'>-</span>
+              }  className='inputs-left bg-[#151399]  cursor-pointer w-full h-full flex items-center justify-center'>
+              <span className='decrease cursor-pointer'>-</span>
             
               </div>
               <div className='qty-value'>
                 <span className='qty text-black' value={qty} >{ qty}</span>
                 <input type="hidden" className='qty-input' value={qty} />
               </div>
-              <div className='inputs-right  bg-[#151399] w-full h-full flex items-center justify-center'> 
-              <span onClick={() => {
+              <div onClick={() => {
                   setQty(qty => qty + 1); 
                   document.querySelector('.qty').value = qty
-              }} className='increase cursor-pointer'>+</span>
+              }} className='inputs-right cursor-pointer bg-[#151399] w-full h-full flex items-center justify-center'> 
+              <span  className='increase cursor-pointer'>+</span>
              </div>
               
           </div>

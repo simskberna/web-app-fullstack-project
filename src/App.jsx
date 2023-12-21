@@ -13,10 +13,8 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react' 
 import { GET } from './api/service.js' 
 import { CREATE_USER } from './api/service.js'   
-import { ListingPage } from './pages/ListingPage' 
-import { ErrorBoundary } from 'react-error-boundary'  
-const App = () => {    
-  const navigate = useNavigate()
+import { ListingPage } from './pages/ListingPage'  
+const App = () => {     
    
   useEffect(() => {
     if (window.localStorage.getItem('userid') === null) { 
@@ -47,10 +45,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<HomePage />} /> 
             
-            <Route
-                path='/categories'
-                element={<CategoryPage handleClick={(name) => handleClick(name)}
-                categories={categories} />} /> 
+            <Route  path='/categories'   element={<CategoryPage />}  categories={categories} /> 
             
             <Route
                 path='/category'

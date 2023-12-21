@@ -2,29 +2,27 @@ import React, { useEffect, useRef, useState } from 'react'
 
 export const AddedCartPopup = (props) => {   
     
-    const [barWidth, setBarWidth] = useState(0);
-    let interval = useRef();
-  
-    useEffect(() => {
-        if (props.isActive) { 
-            interval.current = setInterval(() => {
-                setBarWidth((barWidth) => barWidth + 1); 
-            }, 2);
-            return () => clearInterval(interval);
-        }
+    const [barWidth, setBarWidth] = useState(0);  
+    useEffect(() => {   
+        let intervalId = setInterval(() => {
+            if (barWidth >= document.querySelector('.added-to-cart .popup-main').offsetWidth - 35 && props.isActive) {  
+                clearInterval(intervalId); 
+                setTimeout(() => {setBarWidth(0);},500)
+                props.handleClick(false); 
+            } else if (barWidth < document.querySelector('.added-to-cart .popup-main').offsetWidth - 35 && props.isActive) {   
+                setBarWidth((barWidth) => barWidth + 1);
+                document.querySelector('.added-to-cart .bar-inner').style.width = barWidth + 'px'; 
+                clearInterval(intervalId); 
+            } else { 
+                clearInterval(intervalId);  
+            } 
+        }, 1);  
+         
+        
        
-    }, [props.isActive]);
-  
-    useEffect(() => {
-        
-        document.querySelector('.added-to-cart .bar-inner').style.width = barWidth + 'px';
-        if (barWidth >= document.querySelector('.added-to-cart .popup-main').offsetWidth - 35 && props.isActive === true) {
-            clearInterval(interval.current); 
-            props.handleClick(false);
-            setTimeout(() => {setBarWidth(0);},500)
-        }
-        
-    }, [barWidth]);     
+    }, [props.isActive, barWidth]);
+    
+     
   return (
       <div className='added-to-cart'> 
           <div id="popup-modal" tabIndex="-1" className={`${props.isActive === false ? 'hidden' : ''} flex bg-[#0000006b] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[100%] max-h-full`}>

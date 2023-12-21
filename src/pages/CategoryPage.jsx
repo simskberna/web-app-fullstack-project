@@ -10,7 +10,7 @@ import HomeEntertainment from '../assets/HomeEntertainment.png'
 import Health from '../assets/HealthAndPersonal.png'
 import Lightning from '../assets/Lightning.png'
 
-export const CategoryPage = ({ categories, handleClick }) => {     
+export const CategoryPage = ({ categories }) => {     
   const [thisCategories, setCategories] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   
@@ -67,11 +67,7 @@ export const CategoryPage = ({ categories, handleClick }) => {
             <Link
               style={{ backgroundImage: `url(${image})` }}
               className='bg-no-repeat bg-center drop-shadow-md lg:drop-shadow-lg uppercase text-center font-bold rounded-sm lg:m-14 lg:p-0 m-5 p-2 flex items-center justify-center'
-              key={index}
-              onClick={() => {
-                setCategory(category)
-                handleClick(category)
-              }}
+              key={index} 
               to={`/category?id=${item.id}`}
                > 
               <h5>

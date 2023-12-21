@@ -11,7 +11,7 @@ export const CartPage = () => {
   const dispatch = useDispatch();
   const [purchased, setPurchased] = useState(false);
   const [orderId, setOrderId] = useState(0);
-  const state = useSelector((state) => state)   
+  const cart = useSelector((state) => state.getCart)   
   const id = window.localStorage.getItem('userid') || ''  
   useEffect(() => {
     dispatch(getCart(id))   
@@ -19,7 +19,7 @@ export const CartPage = () => {
   const handlePurchase = () => { 
     const obj = {
       id,
-      cart:state?.getCart?.data
+      cart:cart?.data
     }   
     dispatch(purchase(obj))   
     setTimeout(() => { productUpdate() }, 500)
@@ -31,18 +31,18 @@ export const CartPage = () => {
     setPurchased(true);
     dispatch(getCart(id)); 
   }  
-  if (!state.getCart.isEmpty) {
+  if (!cart.isEmpty) {
     return (
       
       <>
         { 
-           state.getCart.isLoading ? <Loader /> : 
+           cart.isLoading ? <Loader /> : 
             <div className='flex-grow relative h-full lg:min-h-[1000px] overflow-y-scroll'>  
               <div className='cart flex-col'> 
                 <div className='px-5 md:px-20 py-5 top relative h-full'>
                   
                   { 
-                    state?.getCart?.data?.products && state.getCart.data.products.map((product, index) => {  
+                    cart?.data?.products && cart.data.products.map((product, index) => {  
                       return (
                         <CartItem productUpdate={productUpdate} product={product} key={index} index={index} />
                       )
@@ -53,7 +53,7 @@ export const CartPage = () => {
           </div>
           }
         <div className='border-red-500 border-t-2 bottom text-left  px-20 relative bg-[#fff] w-full h-auto'>
-        <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(state?.getCart?.data?.total || 0)?.toFixed(2)} $</div>
+        <div className='total text-2xl font-bold uppercase'>Total : { parseFloat(cart?.data?.total || 0)?.toFixed(2)} $</div>
           <button
             onClick={() => {handlePurchase()}}
             className='text-white my-2 p-5 w-[200px] bg-[#1239b8dd]'>
