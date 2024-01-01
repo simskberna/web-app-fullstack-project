@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ADD_CART } from "../../api/service";
 
 export const addToCart = createAsyncThunk('addToCart', async (info) => {
-    const response = await ADD_CART(`user/add/cart/${window.localStorage.getItem('userid')}`, info);
-    debugger
+    const response = await ADD_CART(`user/add/cart/${window.localStorage.getItem('userid')}`, info); 
     return response;
 })
 const addToCartSlice = createSlice({

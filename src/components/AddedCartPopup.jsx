@@ -26,7 +26,7 @@ export const AddedCartPopup = (props) => {
   return (
       <div className='added-to-cart'> 
           <div id="popup-modal" tabIndex="-1" className={`${props.isActive === false ? 'hidden' : ''} flex bg-[#0000006b] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[100%] max-h-full`}>
-            <div className="relative w-full max-w-md max-h-full shadow-[0_35px_60px_-15px_rgba(0,0,0,0.5)] rounded-lg flex justify-center">
+            <div className="relative w-full max-w-md max-h-full rounded-lg flex justify-center">
                 <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[50%] md:w-full">
                       <button type="button" onClick={() => props.handleClick(false)} className="close-popup absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
                         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

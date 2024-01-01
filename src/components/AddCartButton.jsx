@@ -29,7 +29,10 @@ export const AddCartButton = (props) => {
               
             }, 250)
             setTimeout(() => {
-                props.productUpdate(); 
+                if (props.productUpdate) {
+                    props.productUpdate();    
+                }
+                
             },500)
             dispatch(addToCart(info))
             

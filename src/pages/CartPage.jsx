@@ -14,7 +14,7 @@ export const CartPage = () => {
   const cart = useSelector((state) => state.getCart)   
   const id = window.localStorage.getItem('userid') || ''  
   useEffect(() => {
-    dispatch(getCart(id))   
+    dispatch(getCart(id));
   },[])
   const handlePurchase = () => { 
     const obj = {
@@ -24,11 +24,11 @@ export const CartPage = () => {
     dispatch(purchase(obj))   
     setTimeout(() => { productUpdate() }, 500)
     ORDER(`user/purchase/${obj.id}`, obj.cart).then((data) => {
-     setOrderId(data.orderId)
+      setPurchased(true);
+      setOrderId(data.orderId);
     })
   }
-  const productUpdate = () => {    
-    setPurchased(true);
+  const productUpdate = () => {     
     dispatch(getCart(id)); 
   }  
   if (!cart.isEmpty) {
